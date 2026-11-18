@@ -192,6 +192,27 @@ h2 {
   color: var(--danger);
 }
 
+/* --- Группы меню --- */
+
+.menu-group {
+  margin-top: 22px;
+}
+
+.group-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.group-count {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
 /* --- Карточки рецептов --- */
 
 .recipe-list {
@@ -230,19 +251,16 @@ h2 {
 }
 
 .recipe-name {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  margin: 0;
   font-size: 17px;
 }
 
-.recipe-category {
-  color: var(--ink-3);
-  font-size: 11.5px;
-  white-space: nowrap;
-}
-
-.recipe-meta {
-  margin-top: 4px;
+.recipe-output {
   color: var(--ink-2);
   font-size: 12.5px;
+  white-space: nowrap;
 }
 
 .recipe-prices {
