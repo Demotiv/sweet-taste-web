@@ -19,6 +19,18 @@ export interface RecipeCategory {
   name: string
 }
 
+/** Строка вью `recipe_ingredient_costs` — вклад ингредиента в себестоимость. */
+export interface RecipeIngredientCost {
+  recipe_id: string
+  ingredient_id: string
+  position: number
+  amount_milli: number
+  ingredient_name: string
+  ingredient_unit: string
+  avg_price: number | null
+  cost: number
+}
+
 export interface SyncState {
   schema_version: number
   last_snapshot_at: string

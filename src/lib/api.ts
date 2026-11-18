@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import type { RecipeCategory, RecipeCost, SyncState } from './types'
+import type { RecipeCategory, RecipeCost, RecipeIngredientCost, SyncState } from './types'
 
 export async function fetchRecipeCosts(): Promise<RecipeCost[]> {
   const { data, error } = await supabase
@@ -29,4 +29,15 @@ export async function fetchSyncState(): Promise<SyncState | null> {
 
   if (error) throw new Error(error.message)
   return (data as SyncState | null) ?? null
+}
+
+export async function fetchRecipeIngredients(recipeId: string): Promise<RecipeIngredientCost[]> {
+  const { data, error } = await supabase
+    .from('recipe_ingredient_costs')
+    .select('*')
+    .eq('recipe_id', recipeId)
+    .order('position')
+
+  if (error) throw new Error(error.message)
+  return (data ?? []) as RecipeIngredientCost[]
 }
