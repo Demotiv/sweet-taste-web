@@ -19,6 +19,11 @@ export function money(value: number): string {
   return `${ru.format(value)} ₽`
 }
 
+/** Вверх до целого рубля: 313,61 → 314 ₽. */
+export function moneyUp(value: number): string {
+  return `${ru0.format(Math.ceil(value))} ₽`
+}
+
 /** 2,5 кг — до трёх знаков после запятой. */
 export function quantity(value: number, unit: string): string {
   return `${ruQty.format(value)} ${unit}`
@@ -31,10 +36,10 @@ export function unitPrice(value: number, unit: string): string {
 
 /**
  * Цена за всю партию: цена единицы × выход. Выход хранится в тысячных долях,
- * поэтому делим на 1000. Округление — до копейки, как у себестоимости партии.
+ * поэтому делим на 1000. Округление — вверх до рубля, как у цены за единицу.
  */
 export function batchPrice(pricePerUnit: number, outputQuantityMilli: number): string {
-  return money(Math.round(pricePerUnit * outputQuantityMilli) / 1000)
+  return moneyUp((pricePerUnit * outputQuantityMilli) / 1000)
 }
 
 /** Склонение: 1 ингредиент, 2 ингредиента, 5 ингредиентов. */
