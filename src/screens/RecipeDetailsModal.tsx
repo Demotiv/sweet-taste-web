@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchRecipeIngredients } from '../lib/api'
-import { money, moneySmart, quantity, unitPrice } from '../lib/format'
+import { batchPrice, money, moneySmart, quantity, unitPrice } from '../lib/format'
 import type { RecipeCost, RecipeIngredientCost } from '../lib/types'
 
 interface Props {
@@ -81,6 +81,12 @@ export function RecipeDetailsModal({ recipe, categoryName, onClose }: Props) {
           <div>
             <dt>Цена</dt>
             <dd className="price-accent">{unitPrice(recipe.price_per_unit, recipe.output_unit)}</dd>
+          </div>
+          <div>
+            <dt>Цена партии</dt>
+            <dd className="price-accent">
+              {batchPrice(recipe.price_per_unit, recipe.output_quantity_milli)}
+            </dd>
           </div>
         </dl>
 

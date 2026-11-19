@@ -268,7 +268,8 @@ h2 {
   padding-top: 10px;
   border-top: 1px solid var(--line);
   display: flex;
-  gap: 28px;
+  flex-wrap: wrap;
+  gap: 8px 28px;
 }
 
 .price-label {

@@ -29,6 +29,14 @@ export function unitPrice(value: number, unit: string): string {
   return `${unit === 'г' ? money(value) : moneySmart(value)} / ${unit}`
 }
 
+/**
+ * Цена за всю партию: цена единицы × выход. Выход хранится в тысячных долях,
+ * поэтому делим на 1000. Округление — до копейки, как у себестоимости партии.
+ */
+export function batchPrice(pricePerUnit: number, outputQuantityMilli: number): string {
+  return money(Math.round(pricePerUnit * outputQuantityMilli) / 1000)
+}
+
 /** Склонение: 1 ингредиент, 2 ингредиента, 5 ингредиентов. */
 export function plural(count: number, one: string, few: string, many: string): string {
   const mod10 = count % 10

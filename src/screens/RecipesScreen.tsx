@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchRecipeCategories, fetchRecipeCosts, fetchSyncState } from '../lib/api'
-import { moneySmart, quantity, unitPrice } from '../lib/format'
+import { batchPrice, moneySmart, quantity, unitPrice } from '../lib/format'
 import { supabase } from '../lib/supabase'
 import type { RecipeCategory, RecipeCost, SyncState } from '../lib/types'
 import { RecipeDetailsModal } from './RecipeDetailsModal'
@@ -131,6 +131,12 @@ export function RecipesScreen({ email }: Props) {
                       <span className="price-label">Цена</span>
                       <span className="price-value price-accent">
                         {unitPrice(recipe.price_per_unit, recipe.output_unit)}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="price-label">Партия</span>
+                      <span className="price-value">
+                        {batchPrice(recipe.price_per_unit, recipe.output_quantity_milli)}
                       </span>
                     </div>
                   </div>
