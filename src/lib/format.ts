@@ -1,5 +1,7 @@
 /** Форматы чисел и денег — повторяют desktop (Formats.cs, Units.cs). */
 
+import { orderTotal } from './orderEstimate'
+
 const ru = new Intl.NumberFormat('ru-RU', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
@@ -36,10 +38,11 @@ export function unitPrice(value: number, unit: string): string {
 
 /**
  * Цена за всю партию: цена единицы × выход. Выход хранится в тысячных долях,
- * поэтому делим на 1000. Округление — вверх до рубля, как у цены за единицу.
+ * поэтому делим на 1000. Считается через orderTotal, чтобы совпасть с
+ * калькулятором заказа при предзаполненном количестве.
  */
 export function batchPrice(pricePerUnit: number, outputQuantityMilli: number): string {
-  return moneyUp((pricePerUnit * outputQuantityMilli) / 1000)
+  return moneyUp(orderTotal(pricePerUnit, outputQuantityMilli / 1000))
 }
 
 /** Склонение: 1 ингредиент, 2 ингредиента, 5 ингредиентов. */
